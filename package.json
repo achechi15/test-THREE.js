@@ -1,0 +1,26 @@
+{
+  "name": "test-three",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/achechi15/test-THREE.js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/achechi15/test-THREE.js/issues"
+  },
+  "homepage": "https://github.com/achechi15/test-THREE.js#readme",
+  "dependencies": {
+    "three": "^0.158.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.10.3"
+  }
+}
