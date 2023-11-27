@@ -38,6 +38,11 @@ const renderer = new THREE.WebGLRenderer({alpha: true});
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+// Create a new figure
+/*
+    var 
+*/
+
 var geometry = new THREE.BoxGeometry( 3, 1, 3 );
 var material = new THREE.MeshBasicMaterial( { color: 0xff0000} );
 var cube = new THREE.Mesh( geometry, material );
@@ -45,7 +50,7 @@ let grid = new THREE.GridHelper( 100, 100 );
 scene.add( grid );
 scene.add( cube );
 geometry = new THREE.PlaneGeometry( 3, 3 );
-material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, side : THREE.DoubleSide, opacity: 0.85, transparent: true } );
+material = new THREE.MeshBasicMaterial( { color: 0xFFF0000, side : THREE.DoubleSide, opacity: , transparent: true } );
 const plane = new THREE.Mesh( geometry, material);
 scene.add( plane );
 plane.rotateX(1.5707999)
