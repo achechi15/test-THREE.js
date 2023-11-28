@@ -3,6 +3,7 @@ console.log("Connected");
 const scene = new THREE.Scene();
 
 let camera;
+const scaleWave = 0.27;
 
 const c_width = 10;
 const cameraPos = {
@@ -49,13 +50,21 @@ var cube = new THREE.Mesh( geometry, material );
 let grid = new THREE.GridHelper( 100, 100 );
 scene.add( grid );
 scene.add( cube );
-geometry = new THREE.PlaneGeometry( 3, 3 );
-material = new THREE.MeshBasicMaterial( { color: 0xFFF0000, side : THREE.DoubleSide, opacity: , transparent: true } );
-const plane = new THREE.Mesh( geometry, material);
-scene.add( plane );
-plane.rotateX(1.5707999)
-plane.position.set(0, 0.55, 0);
+let cube2 = cube.clone();
+scene.add( cube2 );
+scene.background = new THREE.Color( 0x000000 );
+cube.position.set(0, 1, 0);
+geometry = new THREE.RingGeometry( 6, 8, 4, 1, 0 );
+material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, side : THREE.DoubleSide, opacity: 1, transparent: true } );
+const ring = new THREE.Mesh( geometry, material);
+scene.add( ring );
+ring.position.set(0, 0.5, 0);
+// scene.remove(cube);
 
+ring.scale.set(scaleWave, scaleWave, scaleWave);
+
+ring.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI/2);
+ring.rotateZ(Math.PI/4);
 
 function animate() {
     requestAnimationFrame( animate );
@@ -65,19 +74,29 @@ function animate() {
 let count = 0;
 function AnimationForceField(waves = 3)
 {
-    if (count < waves) {
-        plane.scale.x += 0.0025;
-        plane.scale.y += 0.0025;
-        if (plane.scale.x > 1.2) {
-            plane.scale.x = 1;
-            plane.scale.y = 1;
-            count = count + 1;
-            console.log(count);
-        }
-    }
-    else {
-        count = 0;
+    // ring.scale.set(scaleWave, scaleWave, scaleWave);
+    ring.scale.x += 0.0020;
+    ring.scale.y += 0.0020;
+    if (ring.scale.x > 0.4) {
+        ring.scale.x = 0.4;
+        ring.scale.y = 0.4;
+        resetWave();
     }
 }
+function resetWave()
+{
+    ring.scale.set(scaleWave, scaleWave, scaleWave);
+    console.log("Ha entrado a la función")
+}
 
+let identificadorIntervaloDeTiempo;
+
+function repetirCadaSegundo() {
+    identificadorIntervaloDeTiempo = setInterval(mandarMensaje, 1000);
+    setInterval(AnimationForceField, 1000);
+}
+function mandarMensaje() {
+    console.log("Ha pasado 1 segundo.");
+}
+repetirCadaSegundo();
 animate();
