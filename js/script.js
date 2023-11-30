@@ -50,21 +50,25 @@ var cube = new THREE.Mesh( geometry, material );
 let grid = new THREE.GridHelper( 100, 100 );
 scene.add( grid );
 scene.add( cube );
-let cube2 = cube.clone();
+geometry = new THREE.BoxGeometry( 2, 1, 3 );
+material = new THREE.MeshBasicMaterial( { color: 0x008000} );
+let cube2 = new THREE.Mesh(geometry, material);
+cube2.position.set(0, 2, 0);
 scene.add( cube2 );
 scene.background = new THREE.Color( 0x000000 );
 cube.position.set(0, 1, 0);
-geometry = new THREE.RingGeometry( 6, 8, 4, 1, 0 );
-material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, side : THREE.DoubleSide, opacity: 1, transparent: true } );
-const ring = new THREE.Mesh( geometry, material);
-scene.add( ring );
-ring.position.set(0, 0.5, 0);
+geometry = new THREE.BoxGeometry(1.9, 0.05, 2.9);
+material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, side : THREE.DoubleSide, opacity: 0.8, transparent: true } );
+const wave = new THREE.Mesh( geometry, material);
+scene.add( wave );
+wave.position.set(0, 1.5, 0);
+
 // scene.remove(cube);
 
-ring.scale.set(scaleWave, scaleWave, scaleWave);
 
-ring.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI/2);
-ring.rotateZ(Math.PI/4);
+
+//ring.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI/2);
+// ring.rotateZ(Math.PI/4);
 
 function animate() {
     requestAnimationFrame( animate );
@@ -75,17 +79,15 @@ let count = 0;
 function AnimationForceField(waves = 3)
 {
     // ring.scale.set(scaleWave, scaleWave, scaleWave);
-    ring.scale.x += 0.0020;
-    ring.scale.y += 0.0020;
-    if (ring.scale.x > 0.4) {
-        ring.scale.x = 0.4;
-        ring.scale.y = 0.4;
-        resetWave();
+    wave.scale.x += 0.015;
+    wave.scale.z += 0.015;
+    if (wave.scale.x > 1.5 || wave.scale.z > 2.5) {
+        setTimeout(resetWave(), 1000000);
     }
 }
 function resetWave()
 {
-    ring.scale.set(scaleWave, scaleWave, scaleWave);
+    wave.scale.set(0, 0.1, 0);
     console.log("Ha entrado a la función")
 }
 
@@ -98,5 +100,14 @@ function repetirCadaSegundo() {
 function mandarMensaje() {
     console.log("Ha pasado 1 segundo.");
 }
-repetirCadaSegundo();
+// repetirCadaSegundo();
 animate();
+
+// Main Set of the wave's constructor
+/*
+    geometry = new THREE.RingGeometry( 6, 8, 4, 1, 0 );
+    TODO: Remember to change the opacity of the material
+    material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, side : THREE.DoubleSide, opacity: 1, transparent: true } );
+    const ring = new THREE.Mesh( geometry, material);
+
+*/
