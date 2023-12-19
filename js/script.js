@@ -1,6 +1,8 @@
 console.log("Connected");
-
+console.log("Hola mundo");
 const scene = new THREE.Scene();
+const heightWave = 0.05
+
 
 let camera;
 const scaleWave = 0.27;
@@ -57,7 +59,7 @@ cube2.position.set(0, 2, 0);
 scene.add( cube2 );
 scene.background = new THREE.Color( 0x000000 );
 cube.position.set(0, 1, 0);
-geometry = new THREE.BoxGeometry(1.9, 0.05, 2.9);
+geometry = new THREE.BoxGeometry(1.9, heightWave, 2.9);
 material = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, side : THREE.DoubleSide, opacity: 0.8, transparent: true } );
 const wave = new THREE.Mesh( geometry, material);
 scene.add( wave );
@@ -79,9 +81,9 @@ let count = 0;
 function AnimationForceField(waves = 3)
 {
     // ring.scale.set(scaleWave, scaleWave, scaleWave);
-    wave.scale.x += 0.015;
-    wave.scale.z += 0.015;
-    if (wave.scale.x > 1.5 || wave.scale.z > 2.5) {
+    wave.scale.x += 0.01;
+    wave.scale.z += 0.01;
+    if (wave.scale.x > 1.35 || wave.scale.z > 1.35) {
         setTimeout(resetWave(), 1000000);
     }
 }
